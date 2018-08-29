@@ -1,4 +1,4 @@
-package cn.wmyskxz.springboot.pojo;
+package cn.wmyskxz.springboot.util;
 
 public class ResponseMessage<T> {
     private String respCode;
