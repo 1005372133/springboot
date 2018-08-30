@@ -11,4 +11,6 @@ public interface StudentService {
     int count();
 
     int del(int id);
+
+    Student insert(Student student);
 }

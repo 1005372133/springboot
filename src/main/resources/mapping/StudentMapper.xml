@@ -20,8 +20,27 @@ id,username,age,sex,pwd
     <select id="count" resultType="java.lang.Integer" parameterType="cn.wmyskxz.springboot.pojo.Student">
     SELECT count(1) FROM student
     </select>
-    <delete id="del" parameterType="java.lang.String">
+    <delete id="del" parameterType="java.lang.Integer">
         DELETE FROM student WHERE id = #{value}
     </delete>
+    <insert id="insert" parameterType="cn.wmyskxz.springboot.pojo.Student">
+        INSERT into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="username != null">username,</if>
+            <if test="age != null">age,</if>
+            <if test="sex != null">sex,</if>
+            <if test="pwd != null">pwd,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id, jdbcType=VARCHAR},</if>
+            <if test="username != null">#{username, jdbcType=VARCHAR},</if>
+            <if test="age != null">#{age, jdbcType=VARCHAR},</if>
+            <if test="sex != null">#{sex, jdbcType=VARCHAR},</if>
+            <if test="pwd != null">#{pwd, jdbcType=VARCHAR},</if>
+        </trim>
+
+    </insert>
+
 
 </mapper>

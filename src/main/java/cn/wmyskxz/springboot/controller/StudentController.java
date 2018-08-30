@@ -44,12 +44,12 @@ public class StudentController {
     }
 
 
-/*    @ApiOperation(value = "新增用户")
+    @ApiOperation(value = "新增用户")
     @RequestMapping(value = "/layui/table/insert",method = RequestMethod.POST)
     @ResponseBody
     public ResponseMessage<Student> insert(@RequestBody Student student){
-        studentMapper.insert(student);
+        s1.insert(student);
         return Result.success(student);
-    }*/
+    }
 
 }

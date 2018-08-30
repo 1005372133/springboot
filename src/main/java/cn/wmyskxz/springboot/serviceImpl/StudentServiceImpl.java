@@ -27,4 +27,17 @@ public class StudentServiceImpl implements StudentService {
     public int del(int id) {
         return dao.del(id);
     }
+
+    @Override
+    public Student insert(Student student) {
+
+        student.setId(student.getId());
+        student.setAge(student.getAge());
+        student.setSex(student.getSex());
+        student.setPwd(student.getPwd());
+        student.setUsername(student.getUsername());
+
+        dao.insert(student);
+        return student;
+    }
 }

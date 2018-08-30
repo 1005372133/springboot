@@ -10,4 +10,6 @@ public interface StudentDao {
     int count();
 
     int del(int id);
+
+    int insert(Student student);
 }
