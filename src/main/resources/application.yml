@@ -9,12 +9,17 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
-
+  jpa:
+    hibernate:
+      ddl-auto: update
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/financedb?characterEncord=UTF-8
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: cn.wmyskxz.springboor.pojo  # 注意：对应实体类的路径
+

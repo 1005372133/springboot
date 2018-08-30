@@ -1,7 +1,13 @@
 package cn.wmyskxz.springboot.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.wmyskxz.springboot.pojo.Student;
 
-public class StudentDao {
+import java.util.List;
 
+public interface StudentDao {
+    List<Student> findAll();
+
+    int count();
+
+    int del(int id);
 }

@@ -1,3 +1,4 @@
+/*
 package cn.wmyskxz.springboot.mapper;
 
 import cn.wmyskxz.springboot.pojo.Student;
@@ -24,3 +25,4 @@ public interface StudentMapper {
     int insert(Student student);
 
 }
+*/

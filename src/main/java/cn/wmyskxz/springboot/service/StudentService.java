@@ -1,8 +1,14 @@
 package cn.wmyskxz.springboot.service;
 
-import org.springframework.stereotype.Service;
 
-@Service
-public class StudentService {
+import cn.wmyskxz.springboot.pojo.Student;
 
+import java.util.List;
+
+public interface StudentService {
+    List<Student> findAll();
+
+    int count();
+
+    int del(int id);
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wmyskxz.springboot.dao.StudentDao">
+    <resultMap type="cn.wmyskxz.springboot.pojo.Student" id="BaseResultMap">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+id,username,age,sex,pwd
+    </sql>
+    <select id="findAll" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.pojo.Student">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM student
+    </select>
+
+    <select id="count" resultType="java.lang.Integer" parameterType="cn.wmyskxz.springboot.pojo.Student">
+    SELECT count(1) FROM student
+    </select>
+    <delete id="del" parameterType="java.lang.String">
+        DELETE FROM student WHERE id = #{value}
+    </delete>
+
+</mapper>
