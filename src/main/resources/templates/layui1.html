@@ -56,28 +56,28 @@
                             </div>
                             <div class="modal-content-div">
                                 <label>ID：</label>
-                                <input id="userNameInput" name="usname"  autocomplete="off" placeholder="必填"
+                                <input id="id" name="id"  autocomplete="off" placeholder="必填"
                                        class="layui-input"  type="text"  lay-verify="CHandENandNum"  >
                             </div>
                             <div class="modal-content-div">
                                 <label>用户名：</label>
-                                <input id="account" name="account" autocomplete="off"  placeholder="必填"
+                                <input id="username" name="username" autocomplete="off"  placeholder="必填"
                                        class="layui-input" type="text" lay-verify="lengthStoTw|ENandNum">
                             </div>
 
                             <div class="modal-content-div" id="passwordDiv">
                                 <label>密码：</label>
-                                <input name="password" id="password"  autocomplete="off" placeholder="必填"
+                                <input name="pwd" id="pwd"  autocomplete="off" placeholder="必填"
                                        class="layui-input" type="text" lay-verify="lengthStoTw|ENandNumandSpe">
                             </div>
                             <div class="modal-content-div">
                                 <label>年龄：</label>
-                                <input name="workNum" autocomplete="off" placeholder="必填" id="workNum"
+                                <input name="age" autocomplete="off" placeholder="必填" id="age"
                                        class="layui-input" >
                             </div>
                             <div class="modal-content-div">
                                 <label>性别：</label>
-                                <input name="email" id="email"  placeholder="必填" autocomplete="off"
+                                <input name="sex" id="sex"  placeholder="必填" autocomplete="off"
                                        class="layui-input" type="email" lay-verify="emailNew|lengthLessTi" >
                             </div>
                         </div>
@@ -109,7 +109,9 @@
 </script>
 <script>
     function createUser() {
+        $("#userForm")[0].reset();
         $('#createUserModal').modal('show');
     }
+
 </script>
 </html>

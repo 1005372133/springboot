@@ -47,4 +47,42 @@ function del(id){
         },
     });
 }
+layui.use(['form', 'layedit', 'laydate'], function () {
+    var form = layui.form
+    //监听提交
+    form.on('submit(userSubmit)', function (data) {
+        submitUserAddData();
+        return false;
+    });
+});
+function submitUserAddData() {
+    var fmsg=$("#userForm").serializeArray();
+    var params ="{";
+    for(var i in fmsg){
+        params+="\""+ fmsg[i].name+"\":\""+fmsg[i].value+"\"" ;
+        if(i<fmsg.length-1){params +=',';}
+    }
+    params += "}";
+    $.ajax({
+        url:"/layui/table/insert",
+        type:"POST",
+        data:params,
+        contentType:"application/json; charset=UTF-8",
+        success:function (data) {
+            if(data.ok){
+                layer.alert('成功！');
+                $("#userForm")[0].reset();
+                $('#createUserModal').modal('hide');
+                tableUser.reload({page:{curr:1}});
+            }else{
+                layer.alert(data.message);
+            }
+        },
+        error:function (data) {
+            layer.alert('失败！');
+        }
+
+    })
+}
+
 
