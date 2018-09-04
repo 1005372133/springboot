@@ -1,12 +1,14 @@
 package cn.wmyskxz.springboot.controller;
 
+import cn.wmyskxz.springboot.common.BaseController;
+import cn.wmyskxz.springboot.common.LayUiResult;
+import cn.wmyskxz.springboot.common.PageInfo;
+import cn.wmyskxz.springboot.common.StudentPage;
 import cn.wmyskxz.springboot.service.StudentService;
-import cn.wmyskxz.springboot.serviceImpl.StudentServiceImpl;
 import cn.wmyskxz.springboot.util.ResponseMessage;
 import cn.wmyskxz.springboot.util.Result;
 import cn.wmyskxz.springboot.pojo.Student;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,18 +18,18 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class StudentController {
+public class StudentController extends BaseController<Student> {
 
     @Resource
-    StudentServiceImpl s1;
+    StudentService s1;
 
     @ApiOperation(value = "获取layui表格")
-    @RequestMapping(value = "/layui/table",method =RequestMethod.GET )
+    @RequestMapping(value = "/layui/table11",method =RequestMethod.GET )
     @ResponseBody
     public Map<String, Object> listStudent2() {
 
-        List<Student> students = s1.findAll();
-        int counts = s1.count();
+        List<Student> students = s1.findAll1();
+        int counts = s1.count1();
         Map<String, Object> map1 = new HashMap<String, Object>();
         map1.put("code", 0);
         map1.put("count", counts);
@@ -35,6 +37,8 @@ public class StudentController {
         map1.put("msg", "获取数据成功");
         return map1;
     }
+
+
     @ApiOperation(value = "删除用户")
     @RequestMapping(value = "/layui/table/del/{id}",method = RequestMethod.DELETE)
     @ResponseBody
@@ -51,5 +55,21 @@ public class StudentController {
         s1.insert(student);
         return Result.success(student);
     }
+    @ApiOperation(value = "修改用户")
+    @RequestMapping(value = "/layui/table/update",method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseMessage<Student> update(@RequestBody Student student) throws Exception {
+        s1.updateByPrimaryKey(student);
+        return Result.success(student);
+    }
 
+
+
+    @ApiOperation(value = "|SysCorpEO|分页查询")
+    @GetMapping("/layui2/table")
+    public LayUiResult<Student> page(StudentPage page) throws Exception {
+        List<Student> rows = s1.queryByPage(page);
+        PageInfo<Student> mapPage = getPageInfo(page.getPager(), rows);
+        return new LayUiResult<Student>(mapPage);
+    }
 }

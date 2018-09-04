@@ -8,21 +8,77 @@
         <result column="sex" property="sex" jdbcType="VARCHAR"/>
         <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <!--查询内容-->
     <sql id="Base_Column_List">
 id,username,age,sex,pwd
     </sql>
-    <select id="findAll" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.pojo.Student">
+    <!--查询条件-->
+    <sql id="Base_Where_Clause">
+        where 1=1
+        <trim suffixOverrides=",">
+            <if test="id!=null">
+                and id= ${idOperrator} #{id}
+            </if>
+            <if test="pwd!=null">
+                and pwd= ${pwdOperrator} #{pwd}
+            </if>
+            <if test="age!=null">
+                and age= ${ageOperrator} #{age}
+            </if>
+            <if test="sex!=null">
+                and sex= ${sexOperrator} #{sex}
+            </if>
+            <if test="username!=null">
+                and username= ${usernameOperrator} #{username}
+            </if>
+        </trim>
+    </sql>
+
+
+    <!--    查找列表内容 不含分页-->
+    <select id="findAll1" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.pojo.Student">
         SELECT
         <include refid="Base_Column_List"/>
         FROM student
     </select>
 
-    <select id="count" resultType="java.lang.Integer" parameterType="cn.wmyskxz.springboot.pojo.Student">
+    <update id="updateByPrimaryKey" parameterType="cn.wmyskxz.springboot.pojo.Student">
+        update student
+        <set>
+            <if test="id != null">
+                id=#{id},
+            </if>
+            <if test="username != null">
+                username=#{username},
+            </if>
+            <if test="sex != null">
+                sex=#{sex},
+            </if>
+            <if test="age != null">
+                age=#{age},
+            </if>
+            <if test="pwd != null">
+                pwd=#{pwd},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <!--查询记录条数-->
+    <select id="queryByCount" resultType="java.lang.Integer" parameterType="cn.wmyskxz.springboot.pojo.Student">
     SELECT count(1) FROM student
     </select>
+
+    <select id="count1" resultType="java.lang.Integer" parameterType="cn.wmyskxz.springboot.pojo.Student">
+    SELECT count(1) FROM student
+    </select>
+    <!--删除记录-->
     <delete id="del" parameterType="java.lang.Integer">
         DELETE FROM student WHERE id = #{value}
     </delete>
+    <!--插入记录-->
     <insert id="insert" parameterType="cn.wmyskxz.springboot.pojo.Student">
         INSERT into student
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -42,5 +98,12 @@ id,username,age,sex,pwd
 
     </insert>
 
+
+    <select id="queryByPage" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.common.BasePage">
+
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM student
+    </select>
 
 </mapper>

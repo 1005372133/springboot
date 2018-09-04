@@ -14,6 +14,7 @@ layui.use('table', function () {
             , {field: 'sex', title: '性别'}
             , {fixed: 'right', width: 150, align: 'center', toolbar: '#barDemo'}
         ]]
+        ,page: true
     });
 
     table.on('tool(demoEvent)', function (obj) {

@@ -1,6 +1,8 @@
 package cn.wmyskxz.springboot.pojo;
 
-public class Student {
+import cn.wmyskxz.springboot.common.BaseEntity;
+
+public class Student extends BaseEntity {
     private String id;
     private String pwd;
     private String username;

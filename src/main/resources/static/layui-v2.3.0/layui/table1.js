@@ -4,7 +4,7 @@ layui.use('table', function () {
 
     tableUser=table.render({
         elem: '#demo'
-        , url: '/layui/table'
+        , url: '/layui/table11'
         , cellMinWidth: 80
         , cols: [[
             {type: 'checkbox'}
@@ -15,21 +15,20 @@ layui.use('table', function () {
             , {field: 'sex', title: '性别'}
             , {fixed: 'right', width: 150, align: 'center', toolbar: '#barDemo'}
         ]]
+        ,page: true
     });
 
     table.on('tool(demo)', function (obj) {
         var data = obj.data;
         if (obj.event === 'detail') {
-            layer.msg('ID：' + data.id + ' 的查看操作');
-
-
+            edit(data);
         } else if (obj.event === 'del') {
             layer.confirm('真的删除行么', function (index) {
                 del(data.id);
                 layer.close(index);
             });
         } else if (obj.event === 'edit') {
-            layer.alert('编辑行：<br>' + JSON.stringify(data))
+            updateRole(data);
         }
     });
 });
@@ -56,6 +55,8 @@ layui.use(['form', 'layedit', 'laydate'], function () {
     });
 });
 function submitUserAddData() {
+    var type;
+    var urlstr;
     var fmsg=$("#userForm").serializeArray();
     var params ="{";
     for(var i in fmsg){
@@ -63,9 +64,16 @@ function submitUserAddData() {
         if(i<fmsg.length-1){params +=',';}
     }
     params += "}";
+    if($("#type").val() == "ADD"){
+        type="POST";
+        urlstr="/layui/table/insert";
+    }else{
+        type="PUT";
+        urlstr="/layui/table/update";
+    }
     $.ajax({
-        url:"/layui/table/insert",
-        type:"POST",
+        url:urlstr,
+        type:type,
         data:params,
         contentType:"application/json; charset=UTF-8",
         success:function (data) {
