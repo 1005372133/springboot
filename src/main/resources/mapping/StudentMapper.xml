@@ -38,9 +38,7 @@ id,username,age,sex,pwd
 
     <!--    查找列表内容 不含分页-->
     <select id="findAll1" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.pojo.Student">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM student
+        select * from STUDENT
     </select>
 
     <update id="updateByPrimaryKey" parameterType="cn.wmyskxz.springboot.pojo.Student">
@@ -68,7 +66,7 @@ id,username,age,sex,pwd
 
     <!--查询记录条数-->
     <select id="queryByCount" resultType="java.lang.Integer" parameterType="cn.wmyskxz.springboot.pojo.Student">
-    SELECT count(1) FROM student
+    SELECT count(1) FROM STUDENT
     </select>
 
     <select id="count1" resultType="java.lang.Integer" parameterType="cn.wmyskxz.springboot.pojo.Student">
@@ -100,10 +98,24 @@ id,username,age,sex,pwd
 
 
     <select id="queryByPage" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.common.BasePage">
-
         SELECT
         <include refid="Base_Column_List"/>
-        FROM student
+        FROM
+        (
+        SELECT
+        tmp.* ,
+        rownum rn
+        FROM
+        (
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        STUDENT
+        <include refid="Base_Where_Clause"/>
+        ) tmp
+        where rownum &lt;= ${pager.endIndex}
+        )
+        where rn &gt;= ${pager.startIndex}
     </select>
 
 </mapper>

@@ -35,7 +35,16 @@
 <div style="width: 100%;height: 45px;">
     <button type="button" style="font-size: 12px;line-height: 12px;float: left;margin-right: 10px;margin-top: 10px"
                       class="btn  btn-primary search-section-btn" onclick="createUser()">新增用户
-</button>
+    </button>
+    <button type="button" class="btn btn-warning search-section-btn" style="font-size: 12px;line-height: 12px"
+            onclick="deleteCorp()">删除
+    </button>
+    <button type="button" class="btn  btn-success search-section-btn" style="font-size: 12px;line-height: 12px"
+            onclick="ImportExcel()">导入
+    </button>
+    <button type="button" class="btn  btn-success  search-section-btn" style="font-size: 12px;line-height: 12px"
+            onclick="exportExcel()">导出
+    </button>
 
 </div>
 <table class="layui-hide" id="demo" lay-filter="demo"></table>
@@ -130,6 +139,7 @@
         $('#sex').val(data.sex);
         $('#username').val(data.username);
         $('#age').val(data.age);
+        $('#userSubmitBtn').show();
     }
     function edit(data){
         $("#userForm")[0].reset();
@@ -142,6 +152,7 @@
         $('#username').val(data.username);
         $('#age').val(data.age);
         $('#createUserModal').modal('show');
+        $('#userSubmitBtn').hide();//关闭提交按钮
     }
 </script>
 </html>

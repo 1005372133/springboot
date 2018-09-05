@@ -1,11 +1,15 @@
-var tableUse,table;
+var tableUse, table;
 layui.use('table', function () {
-   table = layui.table;
+    table = layui.table;
 
-    tableUser=table.render({
+    tableUser = table.render({
         elem: '#demo'
-        , url: '/layui/table11'
+        , url: '/layui/table'
         , cellMinWidth: 80
+        ,request:{
+            limitName:'pageSize',
+            pageName:'pageNo',
+        }
         , cols: [[
             {type: 'checkbox'}
             , {field: 'id', width: 80, title: 'ID', sort: true}
@@ -15,7 +19,7 @@ layui.use('table', function () {
             , {field: 'sex', title: '性别'}
             , {fixed: 'right', width: 150, align: 'center', toolbar: '#barDemo'}
         ]]
-        ,page: true
+        , page: true
     });
 
     table.on('tool(demo)', function (obj) {
@@ -32,20 +36,22 @@ layui.use('table', function () {
         }
     });
 });
-function del(id){
+
+function del(id) {
     $.ajax({
         type: "DELETE",
-        url: "/layui/table/del/"+id,
+        url: "/layui/table/del/" + id,
         /*data:delIds,*/
         dataType: "json",
-        success:function (data) {
-            if(data.ok){
+        success: function (data) {
+            if (data.ok) {
                 layer.alert("删除成功!");
                 tableUser.reload({});
             }
         },
     });
 }
+
 layui.use(['form', 'layedit', 'laydate'], function () {
     var form = layui.form
     //监听提交
@@ -54,43 +60,117 @@ layui.use(['form', 'layedit', 'laydate'], function () {
         return false;
     });
 });
+
 function submitUserAddData() {
     var type;
     var urlstr;
-    var fmsg=$("#userForm").serializeArray();
-    var params ="{";
-    for(var i in fmsg){
-        params+="\""+ fmsg[i].name+"\":\""+fmsg[i].value+"\"" ;
-        if(i<fmsg.length-1){params +=',';}
+    var fmsg = $("#userForm").serializeArray();
+    var params = "{";
+    for (var i in fmsg) {
+        params += "\"" + fmsg[i].name + "\":\"" + fmsg[i].value + "\"";
+        if (i < fmsg.length - 1) {
+            params += ',';
+        }
     }
     params += "}";
-    if($("#type").val() == "ADD"){
-        type="POST";
-        urlstr="/layui/table/insert";
-    }else{
-        type="PUT";
-        urlstr="/layui/table/update";
+    if ($("#type").val() == "ADD") {
+        type = "POST";
+        urlstr = "/layui/table/insert";
+    } else {
+        type = "PUT";
+        urlstr = "/layui/table/update";
     }
     $.ajax({
-        url:urlstr,
-        type:type,
-        data:params,
-        contentType:"application/json; charset=UTF-8",
-        success:function (data) {
-            if(data.ok){
+        url: urlstr,
+        type: type,
+        data: params,
+        contentType: "application/json; charset=UTF-8",
+        success: function (data) {
+            if (data.ok) {
                 layer.alert('成功！');
                 $("#userForm")[0].reset();
                 $('#createUserModal').modal('hide');
-                tableUser.reload({page:{curr:1}});
-            }else{
+                tableUser.reload({page: {curr: 1}});
+            } else {
                 layer.alert(data.message);
             }
         },
-        error:function (data) {
+        error: function (data) {
             layer.alert('失败！');
         }
 
     })
 }
 
+
+/*function exportExcel(){
+    var checkStstus=table.checkStatus('corpTable'),data=checkStstus.data;
+    var delIds = "";
+    if(data.length > 0){
+        for(var i=0;i<data.length;i++){
+            delIds += data[i].id + ",";
+        }
+        delIds = delIds.substring(0, delIds.length-1);
+            window.location.href=addr + '/api/sys/sysCorp/exportCorpExcelBusiness?ids=' + delIds;
+    }else{
+        layer.alert("请选择要导出的数据！");
+        // $("#alertTips").modal('show');
+    }
+
+}
+*/
+/*
+function deleteCorp() {
+    layer.confirm('是否删除选中的', {
+        btn: ['确认','取消'] //按钮
+    }, function(){
+        var checkStstus=table.checkStatus('corpTable'),data=checkStstus.data;
+        var delIds = "";
+        for(var i=0;i<data.length;i++){
+            delIds+=data[i].id;
+            if(i<data.length-1){delIds +=',';}
+        }
+        if(delIds.length>0){
+            $.ajax({
+                type: "DELETE",
+                url: addr+"/api/sys/sysCorp/"+delIds,
+                /!*data:delIds,*!/
+                dataType: "json",
+                success:function (result) {
+                    if(result.ok){
+                        layer.alert("删除"+pageText+"成功!");
+                        corpTable.reload({});
+                    }else{
+                        if(result.respCode == "4869"){
+                            var delMessage = "";
+                            var errorIds = result.message.split(",");
+                            for (var i = 0; i < data.length; i++) {
+                                var delData = data[i];
+                                for (var j = 0; j < errorIds.length; j++) {
+                                    var errorId = errorIds[j];
+                                    if(delData.id == errorId){
+                                        delMessage += delData.corpName;
+                                        delMessage += ",";
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if($("#corpType").val() == 0)
+                                layer.alert(delMessage+"企业下有子部门，无法删除！");
+                            else
+                                layer.alert(delMessage+"使用方下有子部门，无法删除！");
+                            corpTable.reload({});
+                        }else
+                            layer.alert(result.message);
+                    }
+                },error:function (result) {
+                    layer.alert("删除"+pageText+"失败!");
+                }
+            });
+        }else{
+            layer.alert("请选择"+pageText+"!");
+        }
+    });
+}*/
 

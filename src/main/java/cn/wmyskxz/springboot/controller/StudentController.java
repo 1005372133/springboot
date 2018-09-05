@@ -9,22 +9,23 @@ import cn.wmyskxz.springboot.util.ResponseMessage;
 import cn.wmyskxz.springboot.util.Result;
 import cn.wmyskxz.springboot.pojo.Student;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping(value = "/layui")
 public class StudentController extends BaseController<Student> {
 
-    @Resource
+    @Autowired
     StudentService s1;
 
-    @ApiOperation(value = "获取layui表格")
-    @RequestMapping(value = "/layui/table11",method =RequestMethod.GET )
+    @ApiOperation(value = "获取layui表格")///layui/table11
+    @RequestMapping(value = "/table",method =RequestMethod.GET )
     @ResponseBody
     public Map<String, Object> listStudent2() {
 
@@ -40,7 +41,7 @@ public class StudentController extends BaseController<Student> {
 
 
     @ApiOperation(value = "删除用户")
-    @RequestMapping(value = "/layui/table/del/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/table/del/{id}",method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseMessage<Student> del(@PathVariable int id){
         s1.del(id);
@@ -49,14 +50,14 @@ public class StudentController extends BaseController<Student> {
 
 
     @ApiOperation(value = "新增用户")
-    @RequestMapping(value = "/layui/table/insert",method = RequestMethod.POST)
+    @RequestMapping(value = "/table/insert",method = RequestMethod.POST)
     @ResponseBody
     public ResponseMessage<Student> insert(@RequestBody Student student){
         s1.insert(student);
         return Result.success(student);
     }
     @ApiOperation(value = "修改用户")
-    @RequestMapping(value = "/layui/table/update",method = RequestMethod.PUT)
+    @RequestMapping(value = "/table/update",method = RequestMethod.PUT)
     @ResponseBody
     public ResponseMessage<Student> update(@RequestBody Student student) throws Exception {
         s1.updateByPrimaryKey(student);
@@ -66,10 +67,12 @@ public class StudentController extends BaseController<Student> {
 
 
     @ApiOperation(value = "|SysCorpEO|分页查询")
-    @GetMapping("/layui2/table")
+    @GetMapping("/table1")
     public LayUiResult<Student> page(StudentPage page) throws Exception {
         List<Student> rows = s1.queryByPage(page);
         PageInfo<Student> mapPage = getPageInfo(page.getPager(), rows);
         return new LayUiResult<Student>(mapPage);
     }
+
+
 }
