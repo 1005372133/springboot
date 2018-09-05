@@ -18,29 +18,29 @@ id,username,age,sex,pwd
         where 1=1
         <trim suffixOverrides=",">
             <if test="id!=null">
-                and id= ${idOperrator} #{id}
+                and id= ${idOperator} #{id}
             </if>
             <if test="pwd!=null">
-                and pwd= ${pwdOperrator} #{pwd}
+                and pwd= ${pwdOperator} #{pwd}
             </if>
             <if test="age!=null">
-                and age= ${ageOperrator} #{age}
+                and age= ${ageOperator} #{age}
             </if>
             <if test="sex!=null">
-                and sex= ${sexOperrator} #{sex}
+                and sex= ${sexOperator} #{sex}
             </if>
             <if test="username!=null">
-                and username= ${usernameOperrator} #{username}
+                and username= ${usernameOperator} #{username}
             </if>
         </trim>
     </sql>
 
 
     <!--    查找列表内容 不含分页-->
-    <select id="findAll1" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.pojo.Student">
+ <!--   <select id="findAll1" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.pojo.Student">
         select * from STUDENT
     </select>
-
+-->
     <update id="updateByPrimaryKey" parameterType="cn.wmyskxz.springboot.pojo.Student">
         update student
         <set>
@@ -98,7 +98,7 @@ id,username,age,sex,pwd
 
 
     <select id="queryByPage" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.common.BasePage">
-        SELECT
+     <!--   SELECT
         <include refid="Base_Column_List"/>
         FROM
         (
@@ -112,10 +112,19 @@ id,username,age,sex,pwd
         FROM
         STUDENT
         <include refid="Base_Where_Clause"/>
+
         ) tmp
         where rownum &lt;= ${pager.endIndex}
         )
-        where rn &gt;= ${pager.startIndex}
+        where rn &gt;= ${pager.startIndex}-->
+        select <include refid="Base_Column_List" /> from
+        (select tmp_tb.* , rownum rn from
+        (select <include refid="Base_Column_List" /> from STUDENT
+        <include refid="Base_Where_Clause"/>
+        <if test="pager.orderCondition != null and pager.orderCondition != ''" >
+            ${pager.orderCondition}
+        </if>
+        ) tmp_tb where rownum &lt;= ${pager.endIndex})
+        where rn >= ${pager.startIndex}
     </select>
-
 </mapper>

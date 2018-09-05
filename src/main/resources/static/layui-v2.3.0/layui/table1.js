@@ -4,11 +4,11 @@ layui.use('table', function () {
 
     tableUser = table.render({
         elem: '#demo'
-        , url: '/layui/table'
+        , url: '/layui/table1'
         , cellMinWidth: 80
-        ,request:{
+         ,request:{
             limitName:'pageSize',
-            pageName:'pageNo',
+            pageName:'page',
         }
         , cols: [[
             {type: 'checkbox'}
@@ -101,6 +101,21 @@ function submitUserAddData() {
 
     })
 }
+function cleanSelectInfo(){
+    $("#selectid").val("");
+    $("#selectusername").val("");
+    $("#selectage").val("");
+    $("#selectsex").val("");
+}//重置
+function selectCorpPage(){
+    var id=$.trim($("#selectid").val());
+    var username=$.trim($("#selectusername").val());
+    var age=$.trim($("#selectage").val());
+    var sex=$.trim($("#selectsex").val());
+    tableUser.reload(
+        {where:{id:id,username:username,age:age,sex:sex},page:{curr:1}}
+    );
+}//查询
 
 
 /*function exportExcel(){

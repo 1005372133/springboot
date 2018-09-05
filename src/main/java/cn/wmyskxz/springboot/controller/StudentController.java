@@ -8,23 +8,23 @@ import cn.wmyskxz.springboot.service.StudentService;
 import cn.wmyskxz.springboot.util.ResponseMessage;
 import cn.wmyskxz.springboot.util.Result;
 import cn.wmyskxz.springboot.pojo.Student;
+import cn.wmyskxz.springboot.util.StringUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping(value = "/layui")
 public class StudentController extends BaseController<Student> {
 
     @Autowired
     StudentService s1;
 
-    @ApiOperation(value = "获取layui表格")///layui/table11
+    @ApiOperation(value = "获取layui表格")//    /layui/table11
     @RequestMapping(value = "/table",method =RequestMethod.GET )
     @ResponseBody
     public Map<String, Object> listStudent2() {
@@ -69,10 +69,37 @@ public class StudentController extends BaseController<Student> {
     @ApiOperation(value = "|SysCorpEO|分页查询")
     @GetMapping("/table1")
     public LayUiResult<Student> page(StudentPage page) throws Exception {
+
+        if (StringUtil.isNotEmpty(page.getId()) && !page.getId().trim().equals("")) {
+            page.setIdOperator("LIKE");
+            String id = page.getId();
+            page.setId("%" + id + "%");
+        } else {
+            page.setId(null);
+        }
+        if (StringUtil.isNotEmpty(page.getUsername()) && !page.getUsername().trim().equals("")) {
+            page.setUsernameOperator("LIKE");
+            String CorpAddress = page.getUsername();
+            page.setUsername("%" + CorpAddress + "%");
+        } else {
+            page.setUsername(null);
+        }
+        if (StringUtil.isNotEmpty(page.getAge()) && !page.getAge().trim().equals("")) {
+            page.setAgeOperator("LIKE");
+            String CorpDuty = page.getAge();
+            page.setAge("%" + CorpDuty + "%");
+        } else {
+            page.setAge(null);
+        }
+        if (StringUtil.isNotEmpty(page.getSex()) && !page.getSex().trim().equals("")) {
+            page.setSexOperator("LIKE");
+            String CorpUser = page.getSex();
+            page.setSex("%" + CorpUser + "%");
+        } else {
+            page.setSex(null);
+        }
         List<Student> rows = s1.queryByPage(page);
         PageInfo<Student> mapPage = getPageInfo(page.getPager(), rows);
         return new LayUiResult<Student>(mapPage);
     }
-
-
 }

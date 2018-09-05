@@ -21,7 +21,7 @@ public class StudentPage extends BasePage {
     }
 
     public String getIdOperator() {
-        return idOperator;
+        return this.idOperator;
     }
 
     public void setIdOperator(String idOperator) {

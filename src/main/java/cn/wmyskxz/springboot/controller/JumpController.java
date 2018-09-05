@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class JumpController {
-    @ApiOperation(value = "跳转layui")
+   /* @ApiOperation(value = "跳转layui")
     @RequestMapping(value = "/layui", method = RequestMethod.GET)
     public String layui() {
         return "layui";
-    }
+    }*/
 
     @ApiOperation(value = "跳转layui1")
-    @RequestMapping(value = "/layui1", method = RequestMethod.GET)
+    @RequestMapping(value = "/layui", method = RequestMethod.GET)
     public String layui1() {
         return "layui1";
     }
