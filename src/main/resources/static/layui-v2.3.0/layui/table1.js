@@ -134,12 +134,12 @@ function selectCorpPage(){
 
 }
 */
-/*
 function deleteCorp() {
     layer.confirm('是否删除选中的', {
         btn: ['确认','取消'] //按钮
     }, function(){
-        var checkStstus=table.checkStatus('corpTable'),data=checkStstus.data;
+        var checkStstus=table.checkStatus('demo'),data=checkStstus.data;
+        console.log(data)
         var delIds = "";
         for(var i=0;i<data.length;i++){
             delIds+=data[i].id;
@@ -148,13 +148,13 @@ function deleteCorp() {
         if(delIds.length>0){
             $.ajax({
                 type: "DELETE",
-                url: addr+"/api/sys/sysCorp/"+delIds,
-                /!*data:delIds,*!/
+                url: "/layui/table/deleteList/"+delIds,
+                /*data:delIds,*/
                 dataType: "json",
                 success:function (result) {
                     if(result.ok){
-                        layer.alert("删除"+pageText+"成功!");
-                        corpTable.reload({});
+                        layer.alert("删除成功!");
+                        tableUser.reload({});
                     }else{
                         if(result.respCode == "4869"){
                             var delMessage = "";
@@ -164,28 +164,22 @@ function deleteCorp() {
                                 for (var j = 0; j < errorIds.length; j++) {
                                     var errorId = errorIds[j];
                                     if(delData.id == errorId){
-                                        delMessage += delData.corpName;
+                                      //  delMessage += delData.username;//1111111111
                                         delMessage += ",";
                                         break;
                                     }
                                 }
                             }
-
-                            if($("#corpType").val() == 0)
-                                layer.alert(delMessage+"企业下有子部门，无法删除！");
-                            else
-                                layer.alert(delMessage+"使用方下有子部门，无法删除！");
-                            corpTable.reload({});
                         }else
                             layer.alert(result.message);
                     }
                 },error:function (result) {
-                    layer.alert("删除"+pageText+"失败!");
+                    layer.alert("删除失败!");
                 }
             });
         }else{
-            layer.alert("请选择"+pageText+"!");
+            layer.alert("请选择!");
         }
     });
-}*/
+}
 

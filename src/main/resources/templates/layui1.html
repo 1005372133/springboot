@@ -34,6 +34,7 @@
             width: 18%;
             text-align: left;
             margin-top: 10px;
+            margin-left: 10px;
         }/*输入框样式*/
         .search-section-btn{
             height: 34px;
@@ -47,7 +48,7 @@
 </head>
 <body>
     <div style="width: 100%;height: 45px;">
-        <div class="search-section" style="text-align: left;margin-left: 35px">
+        <div class="search-section" style="text-align: left;margin-left: 235px">
             <label >ID</label>
             <input id="selectid" type="text" class="form-control" maxlength="30">
         </div>
@@ -79,12 +80,6 @@
             <button type="button" class="btn btn-warning search-section-btn" style="font-size: 12px;line-height: 12px"
                     onclick="deleteCorp()">删除
             </button>
-            <button type="button" class="btn  btn-success search-section-btn" style="font-size: 12px;line-height: 12px"
-                    onclick="showImportCorp()">导入
-            </button>
-            <button type="button" class="btn  btn-success  search-section-btn" style="font-size: 12px;line-height: 12px"
-                    onclick="exportCorpExcel()">导出
-            </button>
         </div>
     </div>
 
@@ -112,11 +107,6 @@
                             <div class="modal-content-div" style="display: none">
                                 <input type="hidden"  name="usid" id="userId"/>
                                 <input type="hidden" id="type"/>
-                            </div>
-                            <div class="modal-content-div">
-                                <label>ID：</label>
-                                <input id="id" name="id"  autocomplete="off" placeholder="必填"
-                                       class="layui-input"  type="text"  lay-verify="CHandENandNum"  >
                             </div>
                             <div class="modal-content-div">
                                 <label>用户名：</label>

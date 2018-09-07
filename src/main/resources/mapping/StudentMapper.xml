@@ -18,19 +18,19 @@ id,username,age,sex,pwd
         where 1=1
         <trim suffixOverrides=",">
             <if test="id!=null">
-                and id= ${idOperator} #{id}
+                and id ${idOperator} #{id}
             </if>
             <if test="pwd!=null">
-                and pwd= ${pwdOperator} #{pwd}
+                and pwd ${pwdOperator} #{pwd}
             </if>
             <if test="age!=null">
-                and age= ${ageOperator} #{age}
+                and age ${ageOperator} #{age}
             </if>
             <if test="sex!=null">
-                and sex= ${sexOperator} #{sex}
+                and sex ${sexOperator} #{sex}
             </if>
             <if test="username!=null">
-                and username= ${usernameOperator} #{username}
+                and username ${usernameOperator} #{username}
             </if>
         </trim>
     </sql>
@@ -67,13 +67,13 @@ id,username,age,sex,pwd
     <!--查询记录条数-->
     <select id="queryByCount" resultType="java.lang.Integer" parameterType="cn.wmyskxz.springboot.pojo.Student">
     SELECT count(1) FROM STUDENT
-    </select>
+    </select><!--
 
     <select id="count1" resultType="java.lang.Integer" parameterType="cn.wmyskxz.springboot.pojo.Student">
     SELECT count(1) FROM student
     </select>
-    <!--删除记录-->
-    <delete id="del" parameterType="java.lang.Integer">
+-->    <!--删除记录-->
+    <delete id="del" parameterType="java.lang.String">
         DELETE FROM student WHERE id = #{value}
     </delete>
     <!--插入记录-->
@@ -98,25 +98,6 @@ id,username,age,sex,pwd
 
 
     <select id="queryByPage" resultMap="BaseResultMap" parameterType="cn.wmyskxz.springboot.common.BasePage">
-     <!--   SELECT
-        <include refid="Base_Column_List"/>
-        FROM
-        (
-        SELECT
-        tmp.* ,
-        rownum rn
-        FROM
-        (
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM
-        STUDENT
-        <include refid="Base_Where_Clause"/>
-
-        ) tmp
-        where rownum &lt;= ${pager.endIndex}
-        )
-        where rn &gt;= ${pager.startIndex}-->
         select <include refid="Base_Column_List" /> from
         (select tmp_tb.* , rownum rn from
         (select <include refid="Base_Column_List" /> from STUDENT
@@ -125,6 +106,6 @@ id,username,age,sex,pwd
             ${pager.orderCondition}
         </if>
         ) tmp_tb where rownum &lt;= ${pager.endIndex})
-        where rn >= ${pager.startIndex}
+        where rn &gt;= ${pager.startIndex}
     </select>
 </mapper>

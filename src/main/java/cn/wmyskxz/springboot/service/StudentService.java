@@ -1,13 +1,13 @@
 package cn.wmyskxz.springboot.service;
 
-import cn.wmyskxz.springboot.common.BasePage;
+
 import cn.wmyskxz.springboot.common.BaseService;
 import cn.wmyskxz.springboot.dao.StudentDao;
 import cn.wmyskxz.springboot.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 
 @Service
@@ -19,7 +19,7 @@ public class StudentService extends BaseService {
         return dao;
     }
 
-    public List<Student> findAll1() {
+/*    public List<Student> findAll1() {
         return dao.findAll1();
     }
 
@@ -28,15 +28,15 @@ public class StudentService extends BaseService {
     }
     public int count1() {
         return dao.count1();
-    }
+    }*/
 
-    public int del(int id) {
+    public int del(String id) {
         return dao.del(id);
     }
 
     public Student insert(Student student) {
 
-        student.setId(student.getId());
+        student.setId(cn.wmyskxz.springboot.util.UUID.randomUUID10());
         student.setAge(student.getAge());
         student.setSex(student.getSex());
         student.setPwd(student.getPwd());
