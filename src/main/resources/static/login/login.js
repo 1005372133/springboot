@@ -1,6 +1,6 @@
 function login() {
-    clearCookie();
-    $.cookie('mycookie', "", {path: '/',expires: -1});
+   /* clearCookie();
+    $.cookie('mycookie', "", {path: '/',expires: -1});*/
     //用户名密码输入后台交互操作
     /*var verifyCode = $.cookie('verifyCode') || 0;*/
     $("#loginMessageTip").text("");
@@ -34,7 +34,7 @@ function login() {
         dataType:'json',
         success:function(data){
             layer.close(loding);
-            if(1){
+            if(data.ok){
                /* var date = new Date();
                 date = date.setTime(date.getTime()+30*60*60*1000);
                 params["userid"]= data.data.usid;
@@ -50,6 +50,7 @@ function login() {
 
         },
         error: function(e) {
+
             layer.close(loding);
             $("#loginMessageTip").text("登录失败请重试!");
             console.log(e);
