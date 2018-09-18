@@ -46,4 +46,9 @@ public class StudentService extends BaseService {
         dao.insert(student);
         return student;
     }
+
+
+    public Student login (String username,String pwd){
+        return dao.login(username,pwd);
+    }
 }

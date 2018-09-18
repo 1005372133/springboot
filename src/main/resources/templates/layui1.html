@@ -29,12 +29,11 @@
             font-weight: 700;
         }
         .search-section{
-            float: left;
+            margin-right: 4%;
+            float: right;
             font-size: 12px;
-            width: 18%;
+            width: 15%;
             text-align: left;
-            margin-top: 10px;
-            margin-left: 10px;
         }/*输入框样式*/
         .search-section-btn{
             height: 34px;
@@ -43,106 +42,195 @@
         }
 
 
+     /*   .content {
+            z-index: 1;
+            background-position: center top;
+            background-size: cover;
+            overflow: hidden;
+        }
+        .content:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255,255,255,0.8);
+            z-index: -1;
+            background-image: url('/images/timg.jpeg');
+            background-position: center top;
+            background-size: cover;
+            background-attachment: fixed;
+            -webkit-filter: blur(20px);
+            -moz-filter: blur(20px);
+            -ms-filter: blur(20px);
+            -o-filter: blur(20px);
+            filter: blur(20px);
+            margin: -30px;
+        }!*毛玻璃特效*!
+*/
+
 
     </style>
 </head>
-<body>
-    <div style="width: 100%;height: 45px;">
-        <div class="search-section" style="text-align: left;margin-left: 235px">
-            <label >ID</label>
-            <input id="selectid" type="text" class="form-control" maxlength="30">
-        </div>
-        <div class="search-section">
-            <label>用戶名</label>
-            <input id="selectusername" type="text" class="form-control" maxlength="30">
-        </div>
-        <div class="search-section">
-            <label>年龄</label>
-            <input id="selectage" type="text" class="form-control"  maxlength="30">
-        </div>
-        <div class="search-section">
-            <label>性别</label>
-            <input id="selectsex" type="text" class="form-control"  maxlength="30">
-        </div>
-    </div>
+<body style="background-image: url('/images/timg.jpeg')">
 
-    <div style="width: 100%;height: 45px;margin-top: 20px;">
-        <div style="margin-left: 235px;">
-            <button type="button" class="btn btn-warning search-section-btn" style="font-size: 12px;line-height: 12px;float: right;margin-right: 17px;margin-top: -55px"
-                    onclick="cleanSelectInfo()">重置
-            </button>
-            <button type="button" class="btn btn-primary search-section-btn" style="font-size: 12px;line-height: 12px;float: right;margin-right: 17px;margin-top: 0px"
-                    onclick="selectCorpPage()">查询
-            </button>
-            <button type="button" class="btn btn-warning search-section-btn" style="font-size: 12px;line-height: 12px"
-                    onclick="createUser()">新增
-            </button>
-            <button type="button" class="btn btn-warning search-section-btn" style="font-size: 12px;line-height: 12px"
-                    onclick="deleteCorp()">删除
-            </button>
-        </div>
-    </div>
+<div id="topOne">
+    <ul class="layui-nav" lay-filter="">
+        <li class="layui-nav-item"><a href="">最新活动</a></li>
+        <li class="layui-nav-item layui-this"><a href="">产品</a></li>
+        <li class="layui-nav-item"><a href="">大数据</a></li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">解决方案</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd><a href="">移动模块</a></dd>
+                <dd><a href="">后台模版</a></dd>
+                <dd><a href="">电商平台</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">社区</a></li>
+    </ul>
 
+    <script>
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function(){
+            var element = layui.element;
 
+            //…
+        });
+    </script>
 
-
-<div style="width: auto;margin-left: 235px;margin-right: 17px">
-<table class="layui-hide" id="demo" lay-filter="demo"></table>
 </div>
+<div class="layui-row">
 
-<div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: 700px;">
-            <div class="modal-header new-Modal-header-style">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <label class="modal-title" id="createUserModalTitle">新增用户</label>
+        <div class="layui-col-md1">
+
+        <div id="leftOne">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">默认展开</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">选项1</a></dd>
+                        <dd><a href="javascript:;">选项2</a></dd>
+                        <dd><a href="">跳转</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">解决方案</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">移动模块</a></dd>
+                        <dd><a href="">后台模版</a></dd>
+                        <dd><a href="">电商平台</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">产品</a></li>
+                <li class="layui-nav-item"><a href="">大数据</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-col-md9  layui-col-md-offset2" >
+
+            <div style="width: 80%;height: 45px;">
+                <div class="search-section" style="text-align: left;">
+                    <label >ID</label>
+                    <input id="selectid" type="text" class="form-control" maxlength="30">
+                </div>
+                <div class="search-section">
+                    <label>用戶名</label>
+                    <input id="selectusername" type="text" class="form-control" maxlength="30">
+                </div>
+                <div class="search-section">
+                    <label>年龄</label>
+                    <input id="selectage" type="text" class="form-control"  maxlength="30">
+                </div>
+                <div class="search-section">
+                    <label>性别</label>
+                    <input id="selectsex" type="text" class="form-control"  maxlength="30">
+                </div>
+            </div>
+
+            <div style="width: 80%;height: 45px;margin-top: 20px;">
+                <div style="margin-left: 235px;">
+                    <button type="button" class="btn btn-warning search-section-btn" style="font-size: 12px;line-height: 12px;float: right;margin-top: -55px"
+                            onclick="cleanSelectInfo()">重置
+                    </button>
+                    <button type="button" class="btn btn-primary search-section-btn" style="font-size: 12px;line-height: 12px;float: right;margin-top: 0px"
+                            onclick="selectCorpPage()">查询
+                    </button>
+                    <button type="button" class="btn btn-warning search-section-btn" style="font-size: 12px;line-height: 12px"
+                            onclick="createUser()">新增
+                    </button>
+                    <button type="button" class="btn btn-warning search-section-btn" style="font-size: 12px;line-height: 12px"
+                            onclick="deleteCorp()">删除
+                    </button>
+                </div>
             </div>
 
 
-            <form class="layui-form" id="userForm" name="userForm">
-                <div class="layui-form-item">
-                    <div class="modal-body">
-                        <div style="float: left">
-                            <div class="modal-content-div" style="display: none">
-                                <input type="hidden"  name="usid" id="userId"/>
-                                <input type="hidden" id="type"/>
-                            </div>
-                            <div class="modal-content-div">
-                                <label>用户名：</label>
-                                <input id="username" name="username" autocomplete="off"  placeholder="必填"
-                                       class="layui-input" type="text" lay-verify="lengthStoTw|ENandNum">
-                            </div>
 
-                            <div class="modal-content-div" id="passwordDiv">
-                                <label>密码：</label>
-                                <input name="pwd" id="pwd"  autocomplete="off" placeholder="必填"
-                                       class="layui-input" type="text" lay-verify="lengthStoTw|ENandNumandSpe">
-                            </div>
-                            <div class="modal-content-div">
-                                <label>年龄：</label>
-                                <input name="age" autocomplete="off" placeholder="必填" id="age"
-                                       class="layui-input" >
-                            </div>
-                            <div class="modal-content-div">
-                                <label>性别：</label>
-                                <input name="sex" id="sex"  placeholder="必填" autocomplete="off"
-                                       class="layui-input" type="email" lay-verify="emailNew|lengthLessTi" >
-                            </div>
+
+            <div style="width: 80%;margin-left: 235px;margin-right: 30px">
+                <table class="layui-hide" id="demo" lay-filter="demo"></table>
+            </div>
+
+            <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width: 700px;">
+                        <div class="modal-header new-Modal-header-style">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <label class="modal-title" id="createUserModalTitle">新增用户</label>
                         </div>
+
+
+                        <form class="layui-form" id="userForm" name="userForm">
+                            <div class="layui-form-item">
+                                <div class="modal-body">
+                                    <div style="float: left">
+                                        <div class="modal-content-div" style="display: none">
+                                            <input type="hidden"  name="usid" id="userId"/>
+                                            <input type="hidden" id="type"/>
+                                        </div>
+                                        <div class="modal-content-div">
+                                            <label>用户名：</label>
+                                            <input id="username" name="username" autocomplete="off"  placeholder="必填"
+                                                   class="layui-input" type="text" lay-verify="lengthStoTw|ENandNum">
+                                        </div>
+
+                                        <div class="modal-content-div" id="passwordDiv">
+                                            <label>密码：</label>
+                                            <input name="pwd" id="pwd"  autocomplete="off" placeholder="必填"
+                                                   class="layui-input" type="text" lay-verify="lengthStoTw|ENandNumandSpe">
+                                        </div>
+                                        <div class="modal-content-div">
+                                            <label>年龄：</label>
+                                            <input name="age" autocomplete="off" placeholder="必填" id="age"
+                                                   class="layui-input" >
+                                        </div>
+                                        <div class="modal-content-div">
+                                            <label>性别：</label>
+                                            <input name="sex" id="sex"  placeholder="必填" autocomplete="off"
+                                                   class="layui-input" type="email" lay-verify="emailNew|lengthLessTi" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="layui-input-block">
+                                    <button type="button" id="userSubmitBtn" class="btn btn-primary" lay-submit=""  lay-filter="userSubmit"  >保存
+                                    </button>
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="layui-input-block">
-                        <button type="button" id="userSubmitBtn" class="btn btn-primary" lay-submit=""  lay-filter="userSubmit"  >保存
-                        </button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div><!-- /.modal -->
+                </div><!-- /.modal -->
+            </div>
+    </div>
 </div>
+
+
 
 </body>
 <script src="../layui-v2.3.0/layui/jquery-3.3.1.js"></script>

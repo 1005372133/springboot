@@ -1,0 +1,98 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+.page-body{
+    background-color: #f2f7f8;
+    /*width: 100%;*/
+    height: 100%;
+}
+@media (max-width: 1136px){
+    .page-content{
+        width: 1136px;
+    }
+}
+
+.page-left-style{
+    width: 18%;
+    float: left;
+    height: 100%;
+}
+
+.page-right-content{
+    /*float: left;*/
+    /*width: 81%;*/
+    height: 90%;
+    background-color: #f2f7f8;
+    /*text-align: center;*/
+}
+
+.page-main-section{
+    width: 15%;
+    height: 40%;
+    background-color: #4479EA;
+    /*margin: auto;*/
+    display: inline-block;
+    margin-top: 12%;
+    margin-left: 11%;
+    text-align: center;
+    border-radius: 5px;
+}
+.page-main-section img{
+    width: 50px;
+    height: 50px;
+    margin-top: 30%;
+}
+
+.page-main-section a{
+    color: #fff;
+    display: block;
+    margin-top: 20%;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.search-section{
+    float: left;
+    font-size: 12px;
+    width: 18%;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.search-section input{
+    width: 50%;
+    /*height:25px;*/
+    display: inline-block;
+}
+
+.search-section-btn{
+    height: 34px;
+    font-size: 14px;
+    min-width: 100px;
+
+}
+
+.modal-content-div{
+    width: 45%;
+    text-align: right;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.modal-content-div input{
+    width:50%;
+    display: inline-block;
+}
+
+.new-Modal-header-style{
+    color:#fff;
+    background-color:#20a8d8;
+    font-size:16px;
+    border-radius:5px 5px 0px 0px;
+    font-weight: 700;
+}
+
+.layui-table-header span{
+    font-weight: 700;
+}

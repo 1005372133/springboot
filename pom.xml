@@ -92,7 +92,7 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
-        </dependency>
+        </dependency><!--密码加密的依赖-->
 
 
         <dependency>
@@ -105,18 +105,11 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.5</version>
         </dependency>
-
-
-
-
         <dependency>
                     <groupId>com.oracle</groupId>
                     <artifactId>ojdbc7</artifactId>
                 </dependency>
-
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
