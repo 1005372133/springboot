@@ -8,7 +8,7 @@ import cn.wmyskxz.springboot.util.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.util.List;
 
 
 @Service
@@ -40,7 +40,9 @@ public class StudentService extends BaseService {
         student.setId(cn.wmyskxz.springboot.util.UUID.randomUUID10());
         student.setAge(student.getAge());
         student.setSex(student.getSex());
-        student.setPwd(PasswordUtils.encryptPassword(student.getPwd()));
+        //加密
+        // student.setPwd(PasswordUtils.encryptPassword(student.getPwd()));
+        student.setPwd(student.getPwd());
         student.setUsername(student.getUsername());
 
         dao.insert(student);
@@ -51,4 +53,10 @@ public class StudentService extends BaseService {
     public Student login (String username,String pwd){
         return dao.login(username,pwd);
     }
+
+    public List<Student> queryOrgByAccount(String username){
+        return dao.queryOrgByAccount(username);
+    }
+
+    public String queryOrgByPwd(String username){return  dao.queryOrgByPwd(username);}
 }

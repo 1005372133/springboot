@@ -10,8 +10,16 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
   jpa:
+    database: oracle
+    show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+             hibernate:
+                dialect: org.hibernate.dialect.Oracle12cDialect
+
   datasource:
     url: jdbc:oracle:thin:@127.0.0.1:1521:renxu
     username: RENXU
@@ -22,4 +30,3 @@ spring:
 mybatis:
   mapper-locations: classpath:mapping/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
   type-aliases-package: cn.wmyskxz.springboor.pojo  # 注意：对应实体类的路径
-

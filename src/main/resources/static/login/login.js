@@ -1,27 +1,27 @@
 function login() {
-   /* clearCookie();
-    $.cookie('mycookie', "", {path: '/',expires: -1});*/
+    /* clearCookie();
+     $.cookie('mycookie', "", {path: '/',expires: -1});*/
     //用户名密码输入后台交互操作
     /*var verifyCode = $.cookie('verifyCode') || 0;*/
     $("#loginMessageTip").text("");
-    var pw =$("#pwd").val();
+    var pw = $("#pwd").val();
     var userName = $("#username").val();
-    if(userName == null || userName == ""){
+    if (userName == null || userName == "") {
         $("#loginMessageTip").text("账号不能为空");
         return;
-    } else if (userName.length > 30){
+    } else if (userName.length > 30) {
         $("#loginMessageTip").text("账号应为1-30位");
         return;
     }
-    if(pw == null || pw == ""){
+    if (pw == null || pw == "") {
         $("#loginMessageTip").text("密码不能为空");
         return;
-    } else if(pw.length < 6 || pw.length > 20){
+    } else if (pw.length < 6 || pw.length > 20) {
         $("#loginMessageTip").text("密码应为6-20位");
         return;
     }
     var loding = layer.load(1, {shade: false});
-    var params={
+    var params = {
         "username": userName,
         "pwd": pw,
         "isRememberMe": false
@@ -29,27 +29,31 @@ function login() {
     var user = JSON.stringify(params);
 
     $.ajax({
-        url:"/login?username="+userName+"&pwd="+pw,
-        type:'GET',
-        dataType:'json',
-        success:function(data){
+        url: "/login",
+        type: 'POST',
+        data: {
+            "username": userName,
+            "pwd": pw
+        },
+        dataType: 'json',
+        success: function (data) {
             layer.close(loding);
-            if(data.ok){
-               /* var date = new Date();
-                date = date.setTime(date.getTime()+30*60*60*1000);
-                params["userid"]= data.data.usid;
-                user = JSON.stringify(params);
-                $.cookie('mycookie', user, {path: '/',expires: 1});
-                layer.close(loding);*/
+            if (data.ok) {
+                /* var date = new Date();
+                 date = date.setTime(date.getTime()+30*60*60*1000);
+                 params["userid"]= data.data.usid;
+                 user = JSON.stringify(params);
+                 $.cookie('mycookie', user, {path: '/',expires: 1});
+                 layer.close(loding);*/
                 window.location.href = "layui";
-            }else if(data.respCode =="0002"){
+            } else if (data.respCode == "0002") {
 
-            }else{
+            } else {
                 $("#loginMessageTip").text(data.message);
             }
 
         },
-        error: function(e) {
+        error: function (e) {
 
             layer.close(loding);
             $("#loginMessageTip").text("登录失败请重试!");
@@ -88,6 +92,7 @@ function encode64(input) {
 
     return output;
 }
+
 // base64加密结束
 
 /*var getvCode = function () {
@@ -103,19 +108,16 @@ function encode64(input) {
     };
     oReq.send();
 };*/
-function clearCookie()
-{
-    var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
-    if (keys)
-    {
-        for (var i = keys.length; i--;)
-        {
-            document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString();
+function clearCookie() {
+    var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+    if (keys) {
+        for (var i = keys.length; i--;) {
+            document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString();
         }
     }
 }
 
-function resetLoginInput(){
+function resetLoginInput() {
     $("#username").val("");
     $("#pwd").val("");
     $("#loginMessageTip").text("");

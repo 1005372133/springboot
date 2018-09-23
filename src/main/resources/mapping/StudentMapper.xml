@@ -117,4 +117,20 @@ id,username,age,sex,pwd
     <select id="login" parameterType="java.lang.String" resultMap="BaseResultMap">
          select * from student   where username=#{username} and pwd=#{pwd}
     </select>
+
+
+    <select id="queryOrgByAccount" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+    SELECT sex AS userRole
+    FROM Student s
+    WHERE  s.username = #{username}
+    </select>
+
+
+    <select id="queryOrgByPwd" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+    SELECT pwd
+    FROM Student s
+    WHERE  s.username = #{username}
+    </select>
 </mapper>

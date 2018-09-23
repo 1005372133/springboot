@@ -21,4 +21,7 @@ public interface StudentDao extends BaseDao {
     int insert(Student student);
 
     Student login(@Param("username") String username, @Param("pwd")String pwd);
+
+    public List<Student> queryOrgByAccount(String username);
+    String queryOrgByPwd(String username);
 }
